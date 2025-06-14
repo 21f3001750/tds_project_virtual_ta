@@ -1,15 +1,18 @@
 #!/bin/bash
-set -e
 
-# Install uv (if not already in environment)
-curl -Ls https://astral.sh/uv/install.sh | bash
+# Install uv if not present
+curl -Ls https://astral.sh/uv/install.sh | sh
 
-# Install all dependencies from pyproject.toml
-uv pip install --system
+# Add uv to PATH manually
+export PATH="/opt/render/.local/bin:$PATH"
 
-# Activate the virtual environment
-source .venv/bin/activate
+# Optional: create .venv with uv (if not already created)
+# /opt/render/.local/bin/uv venv
 
-# Start your FastAPI app
-uvicorn api:app --host 0.0.0.0 --port 8000
+# Install dependencies (optional if using requirements.txt)
+# /opt/render/.local/bin/uv pip install -r requirements.txt
+
+# Start the FastAPI app
+/opt/render/.local/bin/uvicorn api:app --host 0.0.0.0 --port 10000
+
 
